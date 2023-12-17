@@ -26,6 +26,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        unselectedWidgetColor: Colors.white,
         primaryColor: Colors.blue,
         colorScheme: theme.colorScheme.copyWith(background: darkGray),
         canvasColor: darkGray,
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
             .copyWith(backgroundColor: Colors.white, foregroundColor: darkGray),
         appBarTheme:
             Theme.of(context).appBarTheme.copyWith(backgroundColor: darkGray),
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white),
       ),
       home: const NoteScreen(),
     );

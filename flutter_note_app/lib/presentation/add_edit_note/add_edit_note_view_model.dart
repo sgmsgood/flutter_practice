@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_note_app/domain/model/note.dart';
 import 'package:flutter_note_app/domain/repository/note_repository.dart';
-import 'package:flutter_note_app/domain/use_case/add_note.dart';
+import 'package:flutter_note_app/domain/use_case/add_note_use_case.dart';
 import 'package:flutter_note_app/presentation/add_edit_note/add_edit_note_event.dart';
 import 'package:flutter_note_app/presentation/add_edit_note/add_edit_note_ui_event.dart';
 import 'package:flutter_note_app/ui/colors.dart';
@@ -32,6 +32,11 @@ class AddEditNoteViewModel with ChangeNotifier {
   }
 
   Future<void> _saveNote(int? id, String title, String content) async {
+    if(title.isEmpty || content.isEmpty) {
+      _eventController.add(const AddEditNoteUiEvent.showSnackBar('제목이나 내용이 비어 있습니다.'));
+      return;
+    }
+
     if (id == null) {
       repository.insertNote(
         Note(
@@ -57,6 +62,6 @@ class AddEditNoteViewModel with ChangeNotifier {
       );
     }
 
-    _eventController.add(AddEditNoteUiEvent.saveNote());
+    _eventController.add(const AddEditNoteUiEvent.saveNote());
   }
 }
